@@ -1,0 +1,32 @@
+const deleteProduct = async (req, res) => {
+  try {
+    const { productId } = req.params;
+
+    const product = await productModel.findById(productId);
+    if (!product) {
+      return res.status(400).json({
+        success: false,
+        message: "Product Not Found",
+      });
+    }
+
+    //  Delete Images From Cloudinary
+    if (product.productImg && product.productImg.length > 0) {
+      for (let img of product.productImg) {
+        const result = await cloudinary.uploader.destroy(img.public_id);
+      }
+    }
+
+    // Delete Images From MongoDb
+    await productModel.findByIdAndDelete(productId);
+    return res.status(200).json({
+      success: true,
+      message: "Product Deteted Successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};

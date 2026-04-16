@@ -1,0 +1,18 @@
+try {
+        const res = await axios.post(,{},{
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+          
+        });
+        
+        if(res.data.success){
+          dispatch(setUser(null));
+          toast.success('Logged out successfully');
+        }
+        console.log("TOKEN:", accessToken);
+      } catch (error) {
+        console.log(error);
+        ;
+      }
+    };

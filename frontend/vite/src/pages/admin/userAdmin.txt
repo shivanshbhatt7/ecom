@@ -1,0 +1,192 @@
+import React, { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Label } from "@/components/ui/label";
+// import profile from "../../../public/profile.avif";
+import { Input } from "@/components/ui/input";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { toast } from "sonner";
+import { setUser } from "@/redux/userSlice";
+
+const UserInfo = () => {
+  const navigate = useNavigate();
+  const [file, setFile] = useState(null);
+  const { user } = useSelector((store) => store.user);
+  const params = useParams();
+  const userId = params.id;
+  const dispatch = useDispatch();
+  const [updateUser, setUpdateUser] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNo: "",
+    address: "",
+    city: "",
+    zipCode: "",
+    profilePic: "",
+  });
+  // ✅ INPUT CHANGE
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUpdateUser((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // ✅ FILE CHANGE
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+
+    if (selectedFile) {
+      setUpdateUser((prev) => ({
+        ...prev,
+        profilePic: URL.createObjectURL(selectedFile), // preview
+      }));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const token = localStorage.getItem("accessToken");
+
+    try {
+      const formData = new FormData();
+
+      formData.append("firstName", updateUser.firstName);
+      formData.append("lastName", updateUser.lastName);
+      formData.append("phoneNo", updateUser.phoneNo);
+      formData.append("address", updateUser.address);
+      formData.append("city", updateUser.city);
+      formData.append("zipCode", updateUser.zipCode);
+
+      if (file) {
+        formData.append("file", file);
+      }
+
+      const res = await fetch, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        // ✅ update redux
+        dispatch(setUser(data.user));
+
+        // ✅ update local state immediately
+        setUpdateUser({
+          firstName: data.user?.firstName || "",
+          lastName: data.user?.lastName || "",
+          email: data.user?.email || "",
+          phoneNo: data.user?.phoneNo || "",
+          address: data.user?.address || "",
+          city: data.user?.city || "",
+          zipCode: data.user?.zipCode || "",
+          profilePic: data.user?.profilePic || "",
+        });
+
+        setFile(null);
+
+        toast.success("Profile updated successfully");
+      } else {
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+  getUserDetails();
+}, [userId]);
+
+  return (
+    <div className="pt-5 min-h-screen bg-gray-100">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100">
+          <div className="flex justify-between gap-10 ">
+            <Button onClick={() => navigate(-1)}>
+              <ArrowLeft />
+            </Button>
+            <h1 className="font-bold mb-7 text-2xl text-gray-800">
+              Update Profile
+            </h1>
+          </div>
+          <div className="flex flex-col md:flex-row gap-10 bg-white p-6 rounded shadow">
+            {/* IMAGE */}
+            <div className="flex flex-col items-center">
+              <img
+                src={updateUser?.profilePic || "/profile.avif"}
+                alt="profile"
+                className="w-32 h-32 rounded-full object-cover"
+              />
+
+              <Label className="mt-4 cursor-pointer text-white bg-pink-600 px-4 py-2 rounded hover:bg-pink-700">
+                Change Picture
+                <Input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleFileChange}
+                />
+              </Label>
+            </div>
+
+            {/* FORM */}
+            <form onSubmit={handleSubmit} className="space-y-4 w-max max-w-md">
+              <Input
+                name="firstName"
+                value={updateUser?.firstName || ""}
+                onChange={handleChange}
+                placeholder="First Name"
+              />
+              <Input
+                name="lastName"
+                value={updateUser?.lastName || ""}
+                onChange={handleChange}
+                placeholder="Last Name"
+              />
+              <Input name="email" value={updateUser?.email || ""} disabled />
+              <Input
+                name="phoneNo"
+                value={updateUser?.phoneNo || ""}
+                onChange={handleChange}
+                placeholder="Phone Number"
+              />
+              <Input
+                name="address"
+                value={updateUser?.address || ""}
+                onChange={handleChange}
+                placeholder="Address"
+              />
+              <Input
+                name="city"
+                value={updateUser?.city || ""}
+                onChange={handleChange}
+                placeholder="City"
+              />
+              <Input
+                name="zipCode"
+                value={updateUser?.zipCode || ""}
+                onChange={handleChange}
+                placeholder="Zip Code"
+              />
+
+              <Button className="w-full bg-pink-600 hover:bg-pink-700">
+                Update Profile
+              </Button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default UserInfo;
