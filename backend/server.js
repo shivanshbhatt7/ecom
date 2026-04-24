@@ -15,7 +15,7 @@ const cors = require("cors");
 const PORT = process.env.PORT || 8000;
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "https://ecom-new-neon.vercel.app",
   credentials: true
 }));
 // "https://harviinternational.com"

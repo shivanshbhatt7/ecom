@@ -13,7 +13,7 @@ const verifyEmail = async (token, email) => {
     });
 
     // ✅ HARDCODE YOUR DOMAIN HERE
-    const link = `http://localhost:5173/verify/${token}`;
+    const link = `https://ecom-new-neon.vercel.app/verify/${token}`;
 
     const mailConfigurations = {
       from: process.env.MAIL_USER,

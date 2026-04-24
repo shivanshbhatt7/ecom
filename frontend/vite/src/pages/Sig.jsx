@@ -60,7 +60,7 @@ const Sig = () => {
             {/* Brand Name */}
             <div className="mb-10">
               <h1 className="inline-block px-6 py-3 rounded-full border-2 border-gray-800 font-bold text-xl">
-                Electro
+                Upkarran
               </h1>
             </div>
 
