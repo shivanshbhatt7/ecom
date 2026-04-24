@@ -321,7 +321,7 @@ const Products = () => {
       <div className="sm:hidden flex justify-between items-center px-4 mt-4">
         <button
           onClick={() => setShowMobileFilter(true)}
-          className="bg-pink-600 text-white px-4 py-2 rounded-lg shadow"
+          className="bg-[radial-gradient(circle,_rgba(157,158,157,1)_50%,_rgba(0,0,0,1)_100%)] text-white font-bold px-4 py-2 rounded-lg shadow"
         >
           🔍 Filters
         </button>

@@ -81,7 +81,7 @@ const Cart = () => {
   }, []);
 
   return (
-    <div className="pt-25 bg-gradient-to-b to-white via-gray-100 from-blue-300  min-h-screen px-3 sm:px-6 lg:px-8">
+    <div className="pt-25 bg-gradient-to-b to-white via-gray-100 from-gray-300  min-h-screen px-3 sm:px-6 lg:px-8">
       {cart?.items?.filter((p) => p?.productId)?.length > 0 ? (
         <div className="max-w-7xl mx-auto">
 

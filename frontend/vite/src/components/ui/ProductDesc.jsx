@@ -50,7 +50,7 @@ const ProductDesc = ({ product }) => {
       {showPopup && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-2xl text-center shadow-2xl w-[90%] max-w-sm">
-            <h2 className="text-xl font-semibold text-green-600 mb-2">
+            <h2 className="text-xl font-semibold text-green-600 mb-2 ">
               Added to Cart ✅
             </h2>
             <p className="text-gray-600 text-sm">

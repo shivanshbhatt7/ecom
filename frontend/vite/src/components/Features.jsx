@@ -11,8 +11,8 @@ const Features = () => {
                     <Truck className='h-6 w-6 text-blue-600'></Truck>
                 </div>
                 <div>
-                    <h3 className="font-semibold">Free Shipping</h3>
-                    <p className="text-muted-foreground">On order over ₹500</p>
+                    <h3 className="font-bold">Free Shipping</h3>
+                    <p className="text-muted-foreground font-semibold">On order over ₹500</p>
                 </div>
             </div>
             <div className="flex items-center space-x-4">
@@ -20,8 +20,8 @@ const Features = () => {
                     <Shield className='h-6 w-6 text-green-600'/>
                 </div>
                 <div>
-                    <h3 className="font-semibold">Secure Payment</h3>
-                    <p className="text-muted-foreground">Your data is safe with us</p>
+                    <h3 className="font-bold">Secure Payment</h3>
+                    <p className="text-muted-foreground font-semibold">Your data is safe with us</p>
                 </div>
             </div>
             <div className="flex items-center space-x-4">
@@ -29,8 +29,8 @@ const Features = () => {
                     <Headphones className='h-6 w-6 text-purple-600'/>
                 </div>
                 <div>
-                    <h3 className="font-semibold">24/7 Support</h3>
-                    <p className="text-muted-foreground">Get help whenever you need it</p>
+                    <h3 className="font-bold">24/7 Support</h3>
+                    <p className="text-muted-foreground font-semibold">Get help whenever you need it</p>
                 </div>
             </div>
         </div>
