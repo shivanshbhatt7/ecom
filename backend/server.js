@@ -15,7 +15,7 @@ const cors = require("cors");
 const PORT = process.env.PORT || 8000;
 
 app.use(cors({
-  origin: "http://localhost:5173", // ✅ FRONTEND URL
+  origin: "https://ecom-new-neon.vercel.app", // ✅ FRONTEND URL
   credentials: true
 }));
 // https://ecom-back-1y2l.onrender.com
