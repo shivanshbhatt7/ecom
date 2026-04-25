@@ -61,19 +61,21 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header
-      className={`fixed w-full z-20 transition-all duration-300 ${
-        scrolled ? "hidden" : "bg-[radial-gradient(circle,_rgba(0,0,0,1)_0%,_rgba(157,158,157,1)_50%,_rgba(0,0,0,1)_100%)] shadow-md py-2"
-      }`}
+  <header
+  className={`fixed top-0 w-full z-20 h-[70px] sm:h-[80px] flex items-center transition-all duration-300 ${
+    scrolled
+      ? "bg-black/80 backdrop-blur-md"
+      : "bg-[radial-gradient(circle,_rgba(0,0,0,1)_0%,_rgba(157,158,157,1)_50%,_rgba(0,0,0,1)_100%)]"
+  }`}
     >
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-3">
+      <div className="max-w-7xl mx-auto flex justify-between items-center px-4 w-full h-full">
         
         {/* LOGO */}
         <img
           onClick={() => navigate("/")}
           src="/a.png"
           alt=""
-          className="w-[75px] cursor-pointer"
+          className="w-[45px] sm:w-[60px] cursor-pointer"
         />
         {/* <img
           onClick={() => navigate("/")}
@@ -82,7 +84,7 @@ const Navbar = () => {
           className="w-[55px] cursor-pointer"
         /> */}
 
-        <h1 className="text-5xl text-white font-sans">
+        <h1 className="text-3xl text-white font-sans">
           {/* <b>卄ⲗŕ𝑣𝔦</b> */}
           <b> ᑌᑭKᗩᖇᖇᗩᑎ </b>
         </h1>
@@ -206,7 +208,7 @@ const Navbar = () => {
         </nav>
 
         {/* MOBILE BUTTON */}
-        <button className="md:hidden text-white" onClick={() => setOpen(!open)}>
+        <button className="md:hidden text-white flex items-center justify-center" onClick={() => setOpen(!open)}>
           {open ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>

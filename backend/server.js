@@ -15,10 +15,11 @@ const cors = require("cors");
 const PORT = process.env.PORT || 8000;
 
 app.use(cors({
-  origin: "https://ecom-new-neon.vercel.app",
+  origin: "http://localhost:5173", // ✅ FRONTEND URL
   credentials: true
 }));
-// "https://harviinternational.com"
+// https://ecom-back-1y2l.onrender.com
+// https://ecom-new-neon.vercel.app
 // ✅ MIDDLEWARE
 app.use(express.json());
 console.log("MONGO_URI:", process.env.MONGO_URI);
